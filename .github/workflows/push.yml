@@ -1,9 +1,5 @@
 name: Build
-on:
-  push:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * *'
+on: workflow_dispatch
 
 jobs:
   make_matrix:
@@ -119,7 +115,7 @@ jobs:
       - run: g++ -v
 
       # Extract
-      - run: 7z x sdk.zip -y -p${{ secrets.ZIP_PASSWORD }}
+      - run: 7z x sdk.zip -y
 
       - run: mv sdk greenworks/deps/steamworks_sdk
       - run: yarn install
@@ -161,7 +157,4 @@ jobs:
           tag: v${{ steps.package-version.outputs.version }}
           overwrite: true
           file_glob: true
-
-      - name: Keepalive Workflow
-        uses: gautamkrishnar/keepalive-workflow@1.1.0
 
