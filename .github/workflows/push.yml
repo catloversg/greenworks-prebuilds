@@ -117,7 +117,7 @@ jobs:
       - run: g++ -v
 
       # Extract
-      - run: 7z x sdk_154.zip -y
+      - run: 7z x sdk_156.zip -y
 
       - run: mv sdk greenworks/deps/steamworks_sdk
       - run: yarn install
