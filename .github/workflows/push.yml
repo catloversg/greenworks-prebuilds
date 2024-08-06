@@ -117,13 +117,14 @@ jobs:
       - run: g++ -v
 
       # Extract
-      - run: 7z x sdk_156.zip -y
+      - run: 7z x sdk_150.zip -y
 
       - run: mv sdk greenworks/deps/steamworks_sdk
       - run: yarn install
 
       - run: |
           cd greenworks
+          git checkout 089748355822140aec2b9cd28ae187706842518c
           # git apply ../diff.patch
           yarn install
           cat package.json
