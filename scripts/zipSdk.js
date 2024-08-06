@@ -21,7 +21,7 @@ const exec = async (cmd, args) => {
 }
 
 (async () => {
-  await exec('7z', ['x', 'sdk.zip', '-o.', '-aoa'])
+  await exec('7z', ['x', 'sdk_160.zip', '-o.', '-aoa'])
 
   const rl = readline.createInterface({
     input: process.stdin,
@@ -31,6 +31,6 @@ const exec = async (cmd, args) => {
   rl.question('Password: ', async (password) => {
     rl.close();
 
-    await exec('7z', ['a', 'sdk.zip', `-p${password}`, 'sdk'])
+    await exec('7z', ['a', 'sdk_160.zip', `-p${password}`, 'sdk'])
   });
 })()
