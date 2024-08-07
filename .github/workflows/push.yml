@@ -150,7 +150,22 @@ jobs:
       - name: "ls"
         shell: bash
         run:
-          ls greenworks/build/Release/
+          ls ./artifacts
+
+      - if: matrix.os == 'macos-latest'
+        name: "Hash"
+        shell: bash
+        run: for FILE in ./artifacts/*; do if [ -f "$FILE" ]; then shasum -a 256 $FILE; fi done
+
+      - if: matrix.os == 'ubuntu-latest'
+        name: "Hash"
+        shell: bash
+        run: for FILE in ./artifacts/*; do if [ -f "$FILE" ]; then sha256sum $FILE; fi done
+
+      - if: matrix.os == 'windows-2019'
+        name: "Hash"
+        shell: bash
+        run: for FILE in ./artifacts/*; do if [ -f "$FILE" ]; then certutil -hashfile $FILE SHA256; fi done
 
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
